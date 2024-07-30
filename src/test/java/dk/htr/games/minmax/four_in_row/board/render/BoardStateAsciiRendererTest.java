@@ -98,20 +98,20 @@ public class BoardStateAsciiRendererTest {
 
     String boardStateString_7x6[] =
             { "XOOXOO",
-                    "XXOO  ",
-                    "      ",
-                    "XXOX  ",
-                    "OXO   ",
-                    "X     ",
-                    "OXOOXX  " };
+              "XXOO  ",
+              "      ",
+              "XXOX  ",
+              "OXO   ",
+              "X     ",
+              "OXOOXX  " };
 
     String[] expectedResult_BoardStateString_7x6 = {
-            " 6| x . . . o . . ",
-            " 5| o . . . o . . ",
-            " 4| x o . x x . . ",
-            " 3| o x o x x . o ",
-            " 2| o x o x o . x ",
-            " 1| x o o x x . o ",
+            " 6| O . . . . . X ",
+            " 5| O . . . . . X ",
+            " 4| X O . X . . O ",
+            " 3| O O . O O . O ",
+            " 2| O X . X X . X ",
+            " 1| X X . X O X O ",
             " -----------------",
             "    1 2 3 4 5 6 7 "
     };
