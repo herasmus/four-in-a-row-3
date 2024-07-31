@@ -17,7 +17,7 @@ public class BoardStateLogger {
     @Autowired
     private final BoardStateAsciiRenderer boardState;
 
-    static final Logger logger = LoggerFactory.getLogger(BoardStateLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(BoardStateLogger.class);
 
     public void logBoardStateTrace(long board) throws GameException {
         String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);

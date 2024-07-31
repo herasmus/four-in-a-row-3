@@ -58,6 +58,7 @@ public class BoardStateAsciiRenderer {
     }
 
     public String[] getBoardStateAsciiImage(char[][] board) throws GameException {
+
         // StringBuilder instead of Strings, since Strings ar em
 
         String[] rows = new String[dimensions.getNrOfRows() + 2];
