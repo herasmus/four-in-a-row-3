@@ -12,17 +12,24 @@ import org.slf4j.LoggerFactory;
  *
  *  So comprehensive testing is needed
  */
-@RequiredArgsConstructor
 public class WinDetectorImpl implements WinDetector {
     private static Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
-
     private final GameDimensions dimensions;
+
+    /*
+     * Use the same object instead of creating a new - to save memory
+     */
+    final int[][] winningRow;
+    final WinResult lastResult;
+
+    public WinDetectorImpl(GameDimensions dimensions) {
+        this.dimensions = dimensions;
+        winningRow      = new int[dimensions.getLengthToWin()][2];
+        lastResult      =  new WinResult(false, -1, winningRow);
+    }
 
     @Override
     public boolean hasWinner(char[][] board, int move) throws GameException {
-
-
-
         if(hasVerticalMatch(board[move])) {
             return true;
         }
@@ -64,7 +71,9 @@ public class WinDetectorImpl implements WinDetector {
         char thisMoveDiscColour = column[numberOfDiscs - 1];
 
         int numberInARow = 0;
-        for(int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+        for(int colNr = 0; colNr < dimensions.getNrOfColumns(); colNr++) {
+            char[] col = board[colNr];
+            char ch = board[colNr][numberOfDiscs-1];
             if(board[colNr][numberOfDiscs-1] == thisMoveDiscColour) {
                 numberInARow++;
             } else {
@@ -82,32 +91,38 @@ public class WinDetectorImpl implements WinDetector {
     }
 
     protected boolean hasDiagonalMatchLowerLeftToUpperRight(char[][] board, int move) throws GameException {
-        logger.trace("Win detection - Lower Left to Upper Right:");
-        logger.trace("------------------------------------------");
+        logger.warn("Win detection - Lower Left to Upper Right:");
+        logger.warn("------------------------------------------");
         char[] column = board[move];
         int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
-        char[] currentColumn;
-        /*
-        for(int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
-            currentColumn = board[colNr];
-            int nrOfDiscsCurrentColumn = ColumnUtility.getNumberDiscs(column);
-            if(nrOfDiscsCurrentColumn == 0) break;
-            for(int rowNr = 0; colNr < dimensions.getNrOfColumns() - dimensions.getLengthToWin(); colNr++) {
-            if(column[i] != thisMoveDiscColour) {
-                return false;
+        logger.warn("Active Player colour:      " + thisMoveDiscColour);
+
+        outerloop:
+        for(int colNr = 0; colNr < (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+            logger.warn("Column nr:                 " + colNr);
+            logger.warn("Column:                    '" + (new String(board[colNr])) + "'");
+            for(int rowNr = 0; rowNr <= (dimensions.getNrOfRows() - dimensions.getLengthToWin()); rowNr++) {
+                for(int i = 0; i < dimensions.getLengthToWin(); i++) {
+                    char currentDiscColour = board[colNr + i][rowNr + i];
+                    logger.warn("Position: " + (colNr + i) + ", " + (rowNr + i) + "     Colour: " + "'" + currentDiscColour + "'");
+                    if(currentDiscColour != thisMoveDiscColour) {
+                        logger.warn("--> No Match <--\n");
+                        continue outerloop;
+                    }
+                }
+                logger.warn("****** --> Match <-- ******\n");
+                return true;
             }
-
-
-        }*/
+        }
         return false;
     }
 
     protected boolean hasDiagonalMatch(char[][] board, int move) throws GameException {
-        if(hasDiagonalMatchUpperLeftToLowerRight(board, move)) {
+        if(hasDiagonalMatchLowerLeftToUpperRight(board, move)) {
             return true;
         }
-        return hasDiagonalMatchLowerLeftToUpperRight(board, move);
+        return hasDiagonalMatchUpperLeftToLowerRight(board, move);
     }
 
   /*
