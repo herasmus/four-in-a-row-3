@@ -86,7 +86,33 @@ public class WinDetectorImpl implements WinDetector {
         return false;
     }
 
-    protected boolean hasDiagonalMatchUpperLeftToLowerRight(char[][] board, int move) {
+    protected boolean hasDiagonalMatchUpperLeftToLowerRight(char[][] board, int move) throws GameException {
+        logger.warn("Win detection - Upper Left to Left Right:");
+        logger.warn("-----------------------------------------");
+        char[] column = board[move];
+        int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
+        char thisMoveDiscColour = column[numberOfDiscs - 1];
+        logger.warn("Active Player colour:      " + thisMoveDiscColour);
+
+        for(int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+            logger.warn("Column nr:                 " + colNr);
+            logger.warn("Column:                    '" + (new String(board[colNr])) + "'");
+            int startRow = dimensions.getNrOfRows() - 1;
+            int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
+            outer:
+            for(int rowNr = startRow; rowNr >= numberOfStartRowPositions; rowNr--) {
+                for(int i = 0; i < dimensions.getLengthToWin(); i++) {
+                    char currentDiscColour = board[colNr + i][rowNr - i];
+                    logger.warn("Position: " + (colNr + i) + ", " + (rowNr - i) + "     Colour: " + "'" + currentDiscColour + "'");
+                    if(currentDiscColour != thisMoveDiscColour) {
+                        logger.warn("--> No Match <--\n");
+                        continue outer;
+                    }
+                }
+                logger.warn("****** --> Match <-- ******\n");
+                return true;
+            }
+        }
         return false;
     }
 
@@ -98,17 +124,18 @@ public class WinDetectorImpl implements WinDetector {
         char thisMoveDiscColour = column[numberOfDiscs - 1];
         logger.warn("Active Player colour:      " + thisMoveDiscColour);
 
-        outerloop:
-        for(int colNr = 0; colNr < (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+        int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
+        for(int colNr = 0; colNr <= numberOfStartRowPositions; colNr++) {
             logger.warn("Column nr:                 " + colNr);
             logger.warn("Column:                    '" + (new String(board[colNr])) + "'");
+            outer:
             for(int rowNr = 0; rowNr <= (dimensions.getNrOfRows() - dimensions.getLengthToWin()); rowNr++) {
                 for(int i = 0; i < dimensions.getLengthToWin(); i++) {
                     char currentDiscColour = board[colNr + i][rowNr + i];
                     logger.warn("Position: " + (colNr + i) + ", " + (rowNr + i) + "     Colour: " + "'" + currentDiscColour + "'");
                     if(currentDiscColour != thisMoveDiscColour) {
                         logger.warn("--> No Match <--\n");
-                        continue outerloop;
+                        continue outer;
                     }
                 }
                 logger.warn("****** --> Match <-- ******\n");
