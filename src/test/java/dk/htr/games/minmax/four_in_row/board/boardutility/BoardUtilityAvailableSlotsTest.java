@@ -1,6 +1,6 @@
-package dk.htr.games.minmax.four_in_row.board.boardhandler;
+package dk.htr.games.minmax.four_in_row.board.boardUtility;
 
-import dk.htr.games.minmax.four_in_row.board.BoardHandler;
+import dk.htr.games.minmax.four_in_row.board.BoardUtility;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateAsciiRenderer;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateLogger;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnStringOperations;
@@ -25,12 +25,12 @@ public class BoardHandlerAvailableSlotsTest {
     @Test
     public void noAvailableSlots() throws GameException {
         // Constructing stuff manually - todo Dependency injection?
-        BoardHandler boardHandler = new BoardHandler(gameDim2x4x3, columnOperations2x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim2x4x3, columnOperations2x4x3);
         BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim2x4x3, columnOperations2x4x3);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
         final long board = 0b11000011_11001101L;
-        byte res = boardHandler.getAvailableSlots(board);
+        byte res = boardUtility.getAvailableSlots(board);
         byte expected = 0b00000000;
         if(res != expected) {
             boardStateLogger.logBoardStateWarn(board);
@@ -55,7 +55,7 @@ public class BoardHandlerAvailableSlotsTest {
         ColumnStringOperations columnOperations5x4x3 = new ColumnStringOperations(gameDim5x4x3);
 
         // Constructing stuff manually - todo Dependency injection?
-        BoardHandler boardHandler = new BoardHandler(gameDim5x4x3, columnOperations5x4x3);
+        BoardUtility boardHandler = new BoardUtility(gameDim5x4x3, columnOperations5x4x3);
         BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
@@ -71,12 +71,12 @@ public class BoardHandlerAvailableSlotsTest {
     @Test
     public void maxAvailableSlots() throws GameException {
         // Constructing stuff manually - todo Dependency injection?
-        BoardHandler boardHandler = new BoardHandler(gameDim5x4x3, columnOperations5x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnOperations5x4x3);
         BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
         final long board = 0b01111010_00000001_00000010_01111110_00000101L;
-        byte res = boardHandler.getAvailableSlots(board);
+        byte res = boardUtility.getAvailableSlots(board);
         byte expected = 0b00011111;
         if(res != expected) {
             boardStateLogger.logBoardStateWarn(board);

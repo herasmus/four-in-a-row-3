@@ -1,7 +1,6 @@
 package dk.htr.games.minmax.four_in_row.board.columns.four;
 
 import dk.htr.games.minmax.four_in_row.exceptions.BoardStateException;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,18 +43,15 @@ public enum ValidFourFowColumns {
 
     static final boolean[] columnValidity = new boolean[256];
     static final char[][] columnCharArray = new char[256][];
-    @Getter
     static final List<Integer> intValueList = new ArrayList<Integer>();
-    @Getter
-    private final int intValue;
-    @Getter
-    private final char[] charRepresentation;
+    final int intValue;
+    final char[] charRepresentation;
 
     static {
         for (ValidFourFowColumns c : ValidFourFowColumns.values()) {
-            columnValidity[c.getIntValue()] = true;
-            intValueList.add(c.getIntValue());
-            columnCharArray[c.getIntValue()] = c.getCharRepresentation();
+            columnValidity[c.intValue] = true;
+            intValueList.add(c.intValue);
+            columnCharArray[c.intValue] = c.charRepresentation;
         }
     }
 
