@@ -1,6 +1,7 @@
 package dk.htr.games.minmax.four_in_row.board.winning;
 
 import dk.htr.games.minmax.four_in_row.board.BoardCreator;
+import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,8 @@ public class WinDetectorTest_HorizontalMatch {
     @Test
     public void horizontalMatchFourToWin_Middle() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(horizontalMatchFourToWin_Middle);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));
@@ -42,7 +44,8 @@ public class WinDetectorTest_HorizontalMatch {
     @Test
     public void horizontalMatchFourToWin_LowerLeft() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(horizontalMatchFourToWin_LowerLeft);
 
         assertFalse(winDetector.hasVerticalMatch(board[0]));
@@ -62,7 +65,8 @@ public class WinDetectorTest_HorizontalMatch {
     @Test
     public void horizontalMatchFourToWin_UpperLeft() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(horizontalMatchFourToWin_UpperLeft);
 
         assertFalse(winDetector.hasVerticalMatch(board[2]));
@@ -82,7 +86,8 @@ public class WinDetectorTest_HorizontalMatch {
     @Test
     public void horizontalMatchFourToWin_LowerRight() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(horizontalMatchFourToWin_LowerRight);
 
         assertFalse(winDetector.hasVerticalMatch(board[5]));
@@ -102,7 +107,8 @@ public class WinDetectorTest_HorizontalMatch {
     @Test
     public void horizontalMatchFourToWin_UpperRight() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(horizontalMatchFourToWin_UpperRight);
 
         assertFalse(winDetector.hasVerticalMatch(board[3]));

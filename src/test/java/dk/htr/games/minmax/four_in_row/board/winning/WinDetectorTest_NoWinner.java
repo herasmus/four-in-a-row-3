@@ -1,6 +1,7 @@
 package dk.htr.games.minmax.four_in_row.board.winning;
 
 import dk.htr.games.minmax.four_in_row.board.BoardCreator;
+import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,8 @@ public class WinDetectorTest_NoWinner {
     @Test
     public void noWinnerFourToWin() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetector winDetector = new WinDetectorImpl(dimensions, null);
+        ColumnUtility columnUtility = new ColumnUtility(dimensions);
+        WinDetector winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(noMatchFourToWin);
         assertFalse(winDetector.hasWinner(board, 1));
         assertFalse(winDetector.hasWinner(board, 2));
