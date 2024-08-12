@@ -3,7 +3,7 @@ package dk.htr.games.minmax.four_in_row.board.columns.four;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnMoveExecutor;
 import dk.htr.games.minmax.four_in_row.exceptions.BoardStateException;
 
-import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourFowColumns.*;
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.*;
 
 public class FourRowColumnMoveExecutor implements ColumnMoveExecutor {
     final protected static int[]  RED_MOVES_4R;
