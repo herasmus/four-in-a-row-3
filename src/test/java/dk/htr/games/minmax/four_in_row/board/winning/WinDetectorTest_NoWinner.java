@@ -20,7 +20,7 @@ public class WinDetectorTest_NoWinner {
     @Test
     public void noWinnerFourToWin() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetector winDetector = new WinDetectorImpl(dimensions);
+        WinDetector winDetector = new WinDetectorImpl(dimensions, null);
         char[][] board = BoardCreator.createBoard(noMatchFourToWin);
         assertFalse(winDetector.hasWinner(board, 1));
         assertFalse(winDetector.hasWinner(board, 2));

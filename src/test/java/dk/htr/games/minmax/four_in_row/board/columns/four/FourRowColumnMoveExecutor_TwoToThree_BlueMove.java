@@ -3,7 +3,7 @@ package dk.htr.games.minmax.four_in_row.board.columns.four;
 import dk.htr.games.minmax.four_in_row.exceptions.BoardStateException;
 import org.junit.jupiter.api.Test;
 
-import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourFowColumns.*;
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FourRowColumnMoveExecutor_TwoToThree_BlueMove {

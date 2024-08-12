@@ -35,7 +35,7 @@ public class BoardStateAsciiRendererTest {
      *  0 = 'o'
      *
      */
-    //@Test
+    @Test
     public void getBoardStateString_compact_7x6() throws GameException {
         var renderer = new BoardStateAsciiRenderer(gameDim7x6x4, columnOperations7x6x4);
 
@@ -68,7 +68,7 @@ public class BoardStateAsciiRendererTest {
         assertEquals(expectedLines[7], actualStrings[7]);
     }
 
-    //@Test
+    @Test
     public void getBoardStateString_compact_7x4() throws GameException {
         var renderer = new BoardStateAsciiRenderer(gameDim7x4x4, columnOperations7x4x4);
 
@@ -119,7 +119,7 @@ public class BoardStateAsciiRendererTest {
     @Test
     public void getBoardStateString_7x6() throws GameException {
         var dimensions = new GameDimensions(7, 6, 4);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions);
+        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, null);
         char[][] board = BoardCreator.createBoard(boardStateString_7x6);
 
         var columnStringOperations = new ColumnStringOperations(dimensions);

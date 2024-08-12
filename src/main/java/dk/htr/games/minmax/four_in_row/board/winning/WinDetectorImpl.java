@@ -6,15 +6,18 @@ import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /*
  *  The logic of these methods can be hard to understand - even for the author
  *
  *  So comprehensive testing is needed
  */
+@Component
 public class WinDetectorImpl implements WinDetector {
     private static Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
     private final GameDimensions dimensions;
+    private final ColumnUtility columnUtility;
 
     /*
      * Use the same object instead of creating a new - to save memory
@@ -22,8 +25,9 @@ public class WinDetectorImpl implements WinDetector {
     final int[][] winningRow;
     final WinResult lastResult;
 
-    public WinDetectorImpl(GameDimensions dimensions) {
+    public WinDetectorImpl(GameDimensions dimensions, ColumnUtility columnUtility) {
         this.dimensions = dimensions;
+        this.columnUtility = columnUtility;
         winningRow      = new int[dimensions.getLengthToWin()][2];
         lastResult      =  new WinResult(false, -1, winningRow);
     }
@@ -49,7 +53,7 @@ public class WinDetectorImpl implements WinDetector {
      *
      */
     protected boolean hasVerticalMatch(char[] column) throws GameException {
-        int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
+        int numberOfDiscs = columnUtility.getNumberDiscs(column);
         // Pretty straight forward
         if(numberOfDiscs >= dimensions.getLengthToWin()) {
             char thisMoveDiscColour = column[numberOfDiscs - 1];
@@ -67,7 +71,7 @@ public class WinDetectorImpl implements WinDetector {
 
     protected boolean hasHorizontalMatch(char[][] board, int move) throws GameException {
         char[] column = board[move];
-        int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
+        int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
 
         int numberInARow = 0;
@@ -90,7 +94,7 @@ public class WinDetectorImpl implements WinDetector {
         logger.warn("Win detection - Upper Left to Left Right:");
         logger.warn("-----------------------------------------");
         char[] column = board[move];
-        int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
+        int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
         logger.warn("Active Player colour:      " + thisMoveDiscColour);
 
@@ -120,7 +124,7 @@ public class WinDetectorImpl implements WinDetector {
         logger.warn("Win detection - Lower Left to Upper Right:");
         logger.warn("------------------------------------------");
         char[] column = board[move];
-        int numberOfDiscs = ColumnUtility.getNumberDiscs(column);
+        int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
         logger.warn("Active Player colour:      " + thisMoveDiscColour);
 

@@ -6,6 +6,9 @@ import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static dk.htr.games.minmax.four_in_row.board.bits.BitOperations.readByte;
+import static dk.htr.games.minmax.four_in_row.board.bits.BitOperations.writeByte;
+
 @RequiredArgsConstructor
 @Component
 public class MoveExecuterImpl implements MoveExecuter {
@@ -27,19 +30,16 @@ public class MoveExecuterImpl implements MoveExecuter {
     @Override
     public long moveBlue(long presentBoard, int move) throws GameException {
         checkMoveInRange(move);
-
-   //     int columnBefore = readByte(presentBoard, move-1);
-   //     int columnAfter = columnMoveExecutor.moveBlue(columnBefore);
-     //   return writeByte(presentBoard, columnAfter, move - 1);
-        return 0;
+        int columnBefore = readByte(presentBoard, move-1);
+        int columnAfter = columnMoveExecutor.moveBlue(columnBefore);
+        return writeByte(presentBoard, columnAfter, move - 1);
     }
 
     @Override
     public long moveRed(long presentBoard, int move) throws GameException {
-/*        checkMoveInRange(move);
+        checkMoveInRange(move);
         int columnBefore = readByte(presentBoard, move-1);
         int columnAfter = columnMoveExecutor.moveRed(columnBefore);
-        return writeByte(presentBoard, columnAfter, move - 1);*/
-        return 0;
+        return writeByte(presentBoard, columnAfter, move - 1);
     }
 }
