@@ -47,6 +47,7 @@ public enum ValidFourRowColumns {
     static final List<Integer> intValueList = new ArrayList<Integer>();
     @Getter
     final int intValue;
+    @Getter
     final char[] charRepresentation;
 
     static {

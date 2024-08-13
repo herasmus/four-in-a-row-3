@@ -29,14 +29,14 @@ public class ColumnUtility {
     }
 
     public char[] convert(int column) throws BoardStateException {
-        if (dimensions.getNrOfColumns() == 4) {
+        if (dimensions.getNrOfRows() == 4) {
             return FourRowColumnsUtility.convert(column);
         }
         throw new BoardStateException("Only 4 rows supported at the moment");
     }
 
     public boolean isValidColumn(int column) throws BoardStateException {
-        if (dimensions.getNrOfColumns() == 4) {
+        if (dimensions.getNrOfRows() == 4) {
             return ValidFourRowColumns.isValidColumn(column);
         }
         throw new BoardStateException("Only 4 rows supported at the moment");
