@@ -25,21 +25,21 @@ public class MoveExecuterImpl implements MoveExecuter {
     }
 
     /**
-     * @param move 1 based in domain, 0 based in implementation. Change?
+     * @param move 0 based
      */
     @Override
     public long moveBlue(long presentBoard, int move) throws GameException {
         checkMoveInRange(move);
-        int columnBefore = readByte(presentBoard, move-1);
+        int columnBefore = readByte(presentBoard, move);
         int columnAfter = columnMoveExecutor.moveBlue(columnBefore);
-        return writeByte(presentBoard, columnAfter, move - 1);
+        return writeByte(presentBoard, columnAfter, move);
     }
 
     @Override
     public long moveRed(long presentBoard, int move) throws GameException {
         checkMoveInRange(move);
-        int columnBefore = readByte(presentBoard, move-1);
+        int columnBefore = readByte(presentBoard, move);
         int columnAfter = columnMoveExecutor.moveRed(columnBefore);
-        return writeByte(presentBoard, columnAfter, move - 1);
+        return writeByte(presentBoard, columnAfter, move);
     }
 }

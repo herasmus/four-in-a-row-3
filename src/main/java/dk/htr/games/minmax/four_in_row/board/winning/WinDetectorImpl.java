@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
  *  So comprehensive testing is needed
  */
 @Component
+@RequiredArgsConstructor
 public class WinDetectorImpl implements WinDetector {
     private static Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
     private final GameDimensions dimensions;
@@ -25,9 +26,8 @@ public class WinDetectorImpl implements WinDetector {
     final int[][] winningRow;
     final WinResult lastResult;
 
-    public WinDetectorImpl(GameDimensions dimensions, ColumnUtility columnUtility) {
+    public WinDetectorImpl(GameDimensions dimensions) {
         this.dimensions = dimensions;
-        this.columnUtility = columnUtility;
         winningRow      = new int[dimensions.getLengthToWin()][2];
         lastResult      =  new WinResult(false, -1, winningRow);
     }

@@ -7,5 +7,5 @@ import dk.htr.games.minmax.four_in_row.exceptions.GameException;
  */
 public interface WinDetector {
     boolean hasWinner(char[][] board, int move) throws GameException;
-    //WinResult getLastWinResult(char[][] board, int move, boolean blueDisc) throws GameException;
+//    WinResult getLastWinResult(char[][] board, int move, boolean blueDisc) throws GameException;
 }

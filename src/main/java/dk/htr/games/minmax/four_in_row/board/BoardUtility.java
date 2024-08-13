@@ -46,7 +46,7 @@ public class BoardUtility {
     }
 
 
-    char[][] longToCharMatrix(long longBoard) {
+    public char[][] convertLongToCharMatrix(long longBoard) {
         return null;
     }
 }
