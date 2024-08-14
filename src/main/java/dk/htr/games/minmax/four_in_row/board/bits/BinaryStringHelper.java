@@ -1,4 +1,4 @@
-package dk.htr.games.minmax.four_in_row.board;
+package dk.htr.games.minmax.four_in_row.board.bits;
 
 public class BinaryStringHelper {
     public static String columnToBinaryString(int column)  {

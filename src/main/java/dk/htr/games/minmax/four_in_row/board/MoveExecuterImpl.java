@@ -16,11 +16,11 @@ public class MoveExecuterImpl implements MoveExecuter {
     final private GameDimensions gameDimensions;
 
     private void checkMoveInRange(int move) throws GameException {
-        if(move < 1) {
-            throw new GameException("Move less than 1 not allowed");
+        if(move < 0) {
+            throw new GameException("Move less than 0 not allowed");
         }
-        if(move > gameDimensions.getNrOfColumns()) {
-            throw new GameException("Move greater than " + gameDimensions.getNrOfColumns() + " not allowed");
+        if(move > (gameDimensions.getNrOfColumns() - 1)) {
+            throw new GameException("Move greater than " + (gameDimensions.getNrOfColumns() - 1) + " not allowed");
         }
     }
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static dk.htr.games.minmax.four_in_row.board.BinaryStringHelper.columnToBinaryString;
+import static dk.htr.games.minmax.four_in_row.board.bits.BinaryStringHelper.columnToBinaryString;
 import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

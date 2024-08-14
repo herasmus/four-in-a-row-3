@@ -16,28 +16,17 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class WinDetectorImpl implements WinDetector {
-    private static Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
     private final GameDimensions dimensions;
     private final ColumnUtility columnUtility;
 
-    /*
-     * Use the same object instead of creating a new - to save memory
-     */
-    final int[][] winningRow;
-    final WinResult lastResult;
-
-    public WinDetectorImpl(GameDimensions dimensions) {
-        this.dimensions = dimensions;
-        winningRow      = new int[dimensions.getLengthToWin()][2];
-        lastResult      =  new WinResult(false, -1, winningRow);
-    }
-
     @Override
     public boolean hasWinner(char[][] board, int move) throws GameException {
-        if(hasVerticalMatch(board[move])) {
+
+        if (hasVerticalMatch(board[move])) {
             return true;
         }
-        if(hasHorizontalMatch(board, move)) {
+        if (hasHorizontalMatch(board, move)) {
             return true;
         }
         return hasDiagonalMatch(board, move);
@@ -52,14 +41,14 @@ public class WinDetectorImpl implements WinDetector {
      *
      *
      */
-    protected boolean hasVerticalMatch(char[] column) throws GameException {
+    protected boolean hasVerticalMatch(char[] column) {
         int numberOfDiscs = columnUtility.getNumberDiscs(column);
         // Pretty straight forward
-        if(numberOfDiscs >= dimensions.getLengthToWin()) {
+        if (numberOfDiscs >= dimensions.getLengthToWin()) {
             char thisMoveDiscColour = column[numberOfDiscs - 1];
             int startingDiscPos = numberOfDiscs - dimensions.getLengthToWin();
-            for(int i = startingDiscPos; i < (startingDiscPos + dimensions.getLengthToWin()); i++) {
-                if(column[i] != thisMoveDiscColour) {
+            for (int i = startingDiscPos; i < (startingDiscPos + dimensions.getLengthToWin()); i++) {
+                if (column[i] != thisMoveDiscColour) {
                     return false;
                 }
             }
@@ -69,46 +58,44 @@ public class WinDetectorImpl implements WinDetector {
         return true;
     }
 
-    protected boolean hasHorizontalMatch(char[][] board, int move) throws GameException {
+    protected boolean hasHorizontalMatch(char[][] board, int move) {
         char[] column = board[move];
         int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
 
         int numberInARow = 0;
-        for(int colNr = 0; colNr < dimensions.getNrOfColumns(); colNr++) {
-            char[] col = board[colNr];
-            char ch = board[colNr][numberOfDiscs-1];
-            if(board[colNr][numberOfDiscs-1] == thisMoveDiscColour) {
+        for (int colNr = 0; colNr < dimensions.getNrOfColumns(); colNr++) {
+            if (board[colNr][numberOfDiscs - 1] == thisMoveDiscColour) {
                 numberInARow++;
             } else {
                 numberInARow = 0;
             }
-            if(numberInARow == dimensions.getLengthToWin()) {
+            if (numberInARow == dimensions.getLengthToWin()) {
                 return true;
             }
         }
         return false;
     }
 
-    protected boolean hasDiagonalMatchUpperLeftToLowerRight(char[][] board, int move) throws GameException {
+    protected boolean hasDiagonalMatchUpperLeftToLowerRight(char[][] board, int move) {
         logger.warn("Win detection - Upper Left to Left Right:");
         logger.warn("-----------------------------------------");
         char[] column = board[move];
         int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
-        logger.warn("Active Player colour:      " + thisMoveDiscColour);
+        logger.warn("Active Player colour:      {}", thisMoveDiscColour);
 
-        for(int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+        for (int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
             logger.warn("Column nr:                 " + colNr);
             logger.warn("Column:                    '" + (new String(board[colNr])) + "'");
             int startRow = dimensions.getNrOfRows() - 1;
             int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
             outer:
-            for(int rowNr = startRow; rowNr >= numberOfStartRowPositions; rowNr--) {
-                for(int i = 0; i < dimensions.getLengthToWin(); i++) {
+            for (int rowNr = startRow; rowNr >= numberOfStartRowPositions; rowNr--) {
+                for (int i = 0; i < dimensions.getLengthToWin(); i++) {
                     char currentDiscColour = board[colNr + i][rowNr - i];
-                    logger.warn("Position: " + (colNr + i) + ", " + (rowNr - i) + "     Colour: " + "'" + currentDiscColour + "'");
-                    if(currentDiscColour != thisMoveDiscColour) {
+                    logger.warn("Position: {}, {}     Colour: '{}'", colNr + i, rowNr - i, currentDiscColour);
+                    if (currentDiscColour != thisMoveDiscColour) {
                         logger.warn("--> No Match <--\n");
                         continue outer;
                     }
@@ -120,24 +107,24 @@ public class WinDetectorImpl implements WinDetector {
         return false;
     }
 
-    protected boolean hasDiagonalMatchLowerLeftToUpperRight(char[][] board, int move) throws GameException {
+    protected boolean hasDiagonalMatchLowerLeftToUpperRight(char[][] board, int move) {
         logger.warn("Win detection - Lower Left to Upper Right:");
         logger.warn("------------------------------------------");
         char[] column = board[move];
         int numberOfDiscs = columnUtility.getNumberDiscs(column);
         char thisMoveDiscColour = column[numberOfDiscs - 1];
-        logger.warn("Active Player colour:      " + thisMoveDiscColour);
+        logger.warn("Active Player colour:      {}", thisMoveDiscColour);
 
         int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
-        for(int colNr = 0; colNr <= numberOfStartRowPositions; colNr++) {
-            logger.warn("Column nr:                 " + colNr);
-            logger.warn("Column:                    '" + (new String(board[colNr])) + "'");
+        for (int colNr = 0; colNr <= numberOfStartRowPositions; colNr++) {
+            logger.warn("Column nr:                 {}", colNr);
+            logger.warn("Column:                    '{}'", new String(board[colNr]));
             outer:
-            for(int rowNr = 0; rowNr <= (dimensions.getNrOfRows() - dimensions.getLengthToWin()); rowNr++) {
-                for(int i = 0; i < dimensions.getLengthToWin(); i++) {
+            for (int rowNr = 0; rowNr <= (dimensions.getNrOfRows() - dimensions.getLengthToWin()); rowNr++) {
+                for (int i = 0; i < dimensions.getLengthToWin(); i++) {
                     char currentDiscColour = board[colNr + i][rowNr + i];
-                    logger.warn("Position: " + (colNr + i) + ", " + (rowNr + i) + "     Colour: " + "'" + currentDiscColour + "'");
-                    if(currentDiscColour != thisMoveDiscColour) {
+                    logger.warn("Position: {}, {}     Colour: '{}'", colNr + i, rowNr + i, currentDiscColour);
+                    if (currentDiscColour != thisMoveDiscColour) {
                         logger.warn("--> No Match <--\n");
                         continue outer;
                     }
@@ -150,53 +137,9 @@ public class WinDetectorImpl implements WinDetector {
     }
 
     protected boolean hasDiagonalMatch(char[][] board, int move) throws GameException {
-        if(hasDiagonalMatchLowerLeftToUpperRight(board, move)) {
+        if (hasDiagonalMatchLowerLeftToUpperRight(board, move)) {
             return true;
         }
         return hasDiagonalMatchUpperLeftToLowerRight(board, move);
     }
-
-  /*
-    private WinResult getDiagonalResult(char[][] board) {
-    }
-
-    private WinResult getHorizontalResult(char[][] board) {
-        return null;
-    }
-
-    private WinResult getVerticalResult(char[] column, move ) {
-        return null;
-    }
-*/
-
-
-/*
-    @Override
-    public WinResult getWinResult(char[][] board, int move, boolean blueDisc) throws GameException {
-        WinResult winResult = getVerticalResult();
-        if(winResult == null) {
-            winResult = getHorizontalResult(board);
-        } else {
-            return winResult;
-        }
-        if(winResult == null) {
-            winResult = getDiagonalResult(board);
-        }
-        if(winResult == null) {
-            return new WinResult(false, move, null);
-        } else {
-            return  winResult;
-        }
-    }
-
-    private WinResult getDiagonalResult(char[][] board) {
-    }
-
-    private WinResult getHorizontalResult(char[][] board) {
-        return null;
-    }
-
-    private WinResult getVerticalResult(char[] column, move ) {
-        return null;
-    }*/
 }

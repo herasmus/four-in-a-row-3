@@ -1,5 +1,6 @@
-package dk.htr.games.minmax.four_in_row.board;
+package dk.htr.games.minmax.four_in_row.board.bits;
 
+import dk.htr.games.minmax.four_in_row.board.BoardUtility;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateAsciiRenderer;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateLogger;
@@ -61,9 +62,9 @@ public class BoardUtilityAvailableSlotsTest {
         BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
-        final long board = 0b00111010_00000001_00111110_10000000_11001101L;
+        final long board = 0b00000010_00000001_11001001_00000100_11001101L;
         byte got = boardUtility.getAvailableSlots(board);
-        byte expected = 0b00011110;
+        byte expected = 0b00011010;
         if(got != expected) {
             boardStateLogger.logBoardStateWarn(board);
         }

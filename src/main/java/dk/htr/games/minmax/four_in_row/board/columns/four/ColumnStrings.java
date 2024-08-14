@@ -9,7 +9,7 @@ public class ColumnStrings {
 
     final static char[] COLUMN_EMPTY_STR = { E, E, E, E};
     final static char[] COLUMN_O_STR     = { E, E, E, O};
-    final static char[] COLUMN_X_STR     = { E, E, E, O};
+    final static char[] COLUMN_X_STR     = { E, E, E, X};
     final static char[] COLUMN_OO_STR    = { E, E, O, O};
     final static char[] COLUMN_OX_STR    = { E, E, O, X};
     final static char[] COLUMN_XO_STR    = { E, E, X, O};

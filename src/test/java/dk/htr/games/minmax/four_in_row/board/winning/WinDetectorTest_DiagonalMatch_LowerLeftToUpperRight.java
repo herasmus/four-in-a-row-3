@@ -31,11 +31,13 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_Middle);
 
-        assertFalse(winDetector.hasVerticalMatch(board[3]));
-        assertFalse(winDetector.hasHorizontalMatch(board, 3));
-        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, 3));
-        assertTrue(winDetector.hasDiagonalMatch(board, 3));
-        assertTrue(winDetector.hasWinner(board, 3));
+        int move = 3;
+
+        assertFalse(winDetector.hasVerticalMatch(board[move]));
+        assertFalse(winDetector.hasHorizontalMatch(board, move));
+        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, move));
+        assertTrue(winDetector.hasDiagonalMatch(board, move));
+        assertTrue(winDetector.hasWinner(board, move));
     }
 
     String diagonalMatchLowerLeftUpperRight_LowerLeft[] =

@@ -22,25 +22,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
     final private BoardUtility boardUtility;
     final private WinDetector winDetector;
     final private MoveExecuter moveExecuter;
-
-    private boolean gameOver(long board, int move) throws GameException {
-        char[][] boardMatrix = boardUtility.convertLongToCharMatrix(board);
-        return winDetector.hasWinner(boardMatrix, move);
-    }
-
-    private int evaluate(long board, int move) throws GameException {
-        int score = 0;
-        if (gameOver(board, move)) {
-            if (winner == aiPlayer) {
-                logger.trace("AI Player 'won'");
-                score = 100;
-            } else if (winner == opponentPlayer) {
-                logger.trace("Opponent Player 'won'");
-                score = -100;
-            }
-        }
-        return score;
-    }
+    private long initialBoard = -1L;
 
     @Override
     public long getNumberOfBoardsEvaluated() {
@@ -83,39 +65,43 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
         return best;
     }
 
+    private boolean gameOver(long board, int move) throws GameException {
+        char[][] charBoard = boardUtility.convertToCharMatrix(board);
+        return board == initialBoard || winDetector.hasWinner(charBoard, move);
+    }
+
     @Override
     public int miniMax(long board, int move, boolean isMaximising) throws GameException {
         nrOfBoardsEvaluated++;
-        if(logger.isTraceEnabled()) {
+        if (logger.isTraceEnabled()) {
             logger.trace("Boards evaluated so far: {}", nrOfBoardsEvaluated);
         } else {
-            if(nrOfBoardsEvaluated % 10000 == 0) {
+            if (nrOfBoardsEvaluated % 10000 == 0) {
                 logger.debug("Boards evaluated so far: {}", nrOfBoardsEvaluated);
             }
         }
 
         // if state is terminal, then return score (Leaf node)
-        char[][] charBoard = boardUtility.convertLongToCharMatrix(board);
-        if(winDetector.hasWinner(charBoard, move)) {
-            if(isMaximising) {
+        if(gameOver(board, move)) {
+            if (isMaximising) {
                 return 1;
             } else {
                 return -1;
             }
         }
 
-        if (theBoard.isGameOver()) {
-            logger.trace("Game over");
-            return evaluate(theBoard);
-        }
-
         // AIPlayer (maximising player)
-        if(isMaximising) {
+        if (isMaximising) {
             logger.trace("AI Player - maximizing)");
             return maximize(board);
         } else {
             logger.trace("Human player - minimizing)");
             return minimize(board);
         }
+    }
+
+    public int run() throws GameException {
+        initialBoard = boardUtility.createInitialBoard();
+        return miniMax(initialBoard, -1, true);
     }
 }
