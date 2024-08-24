@@ -19,6 +19,7 @@ public class ColumnStringOperations {
     private final static String underflowExcStr = "Underflow: Column: %s  String array length: %d  Bitnumber:  %d  Index: %d";
     private final static String overflowExcStr  = "Overflow:  Column: %s  String array length: %d  Bitnumber:  %d  Index: %d";
 
+
     private static void validateIndex(int column, int strArrayLength, int bitNumber, int index) throws GameException {
         String columnBinaryString =Integer.toBinaryString(column);
         if(index < 0) {

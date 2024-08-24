@@ -21,39 +21,37 @@ public class BoardUtilityConvertToCharMatrixTest {
 
     // 2x4x3 board
     final static GameDimensions gameDim2x4x3 = new GameDimensions(2, 4, 3);
-    final static ColumnStringOperations columnOperations2x4x3 = new ColumnStringOperations(gameDim2x4x3);
 
     // 5x4x3 board
     final static GameDimensions gameDim5x4x3 = new GameDimensions(5, 4, 3);
-    final static ColumnStringOperations columnOperations5x4x3 = new ColumnStringOperations(gameDim5x4x3);
 
     @Test
     public void convertToCharMatrix_2Columns4Rows() throws GameException {
         ColumnUtility columnUtility = new ColumnUtility(gameDim2x4x3);
-        BoardUtility boardUtility = new BoardUtility(gameDim2x4x3, columnUtility, columnOperations2x4x3);
-        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim2x4x3, columnOperations2x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim2x4x3, columnUtility);
+        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim2x4x3, boardUtility);
 
         final long board = 0b11000101_00000011L;
         char[][] result = boardUtility.convertToCharMatrix(board);
         char[][] expected = {
-                { E, E, X, X},
-                { O, X, O, X}};
+                { X, X, E, E},
+                { X, O, X, O}};
         assertArrayEquals(expected, result);
     }
 
     @Test
     public void convertToCharMatrix_5Columns4Rows() throws GameException {
         ColumnUtility columnUtility = new ColumnUtility(gameDim5x4x3);
-        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility, columnOperations5x4x3);
-        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility);
+        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, boardUtility);
         final long board = 0b00000010_00000001_11001001_00000100_11001101L;
         char[][] result = boardUtility.convertToCharMatrix(board);
         char[][] expected = {
-                { X, X, O, X},
-                { E, X, O, O},
+                { X, O, X, X},
+                { O, O, X, E},
                 { X, O, O, X},
-                { E, E, E, X},
-                { E, E, X, O},
+                { X, E, E, E},
+                { O, X, E, E},
 
         };
         if(!Arrays.equals(expected, result)) {

@@ -19,9 +19,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_BlueMove {
      * Expected: 0000_0100
      */
     @Test
-    public void move_OO_to_XOO() throws BoardStateException {
-        int result   = columnMoves.moveBlue(COLUMN_OO.getIntValue());
-        assertEquals(COLUMN_XOO.getIntValue(), result);
+    public void move_OOEE_to_OOXE() throws BoardStateException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_OOEE.getIntValue());
+        assertEquals(COLUMN_4R_OOXE.getIntValue(), result);
     }
 
     /*
@@ -35,9 +35,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_BlueMove {
      * Expected: 0000_0110
      */
     @Test
-    public void move_OO_to_XXO() throws BoardStateException {
-        int result   = columnMoves.moveBlue(COLUMN_XO.getIntValue());
-        assertEquals(COLUMN_XXO.getIntValue(), result);
+    public void move_OXEE_to_OXXE() throws BoardStateException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_OXEE.getIntValue());
+        assertEquals(COLUMN_4R_OXXE.getIntValue(), result);
     }
 
     /*
@@ -51,9 +51,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_BlueMove {
      * Expected: 0000_0101
      */
     @Test
-    public void move_OX_to_XOX() throws BoardStateException {
-        int result   = columnMoves.moveBlue(COLUMN_OX.getIntValue());
-        assertEquals(COLUMN_XOX.getIntValue(), result);
+    public void move_XOEE_to_XOXE() throws BoardStateException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_XOEE.getIntValue());
+        assertEquals(COLUMN_4R_XOXE.getIntValue(), result);
     }
 
     /*
@@ -67,8 +67,8 @@ public class FourRowColumnMoveExecutor_TwoToThree_BlueMove {
      * Expected: 0000_0111
      */
     @Test
-    public void move_XX_to_XXX() throws BoardStateException {
-        int result   = columnMoves.moveBlue(COLUMN_XX.getIntValue());
-        assertEquals(COLUMN_XXX.getIntValue(), result);
+    public void move_XXEE_to_XXXE() throws BoardStateException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_XXEE.getIntValue());
+        assertEquals(COLUMN_4R_XXXE.getIntValue(), result);
     }
 }

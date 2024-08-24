@@ -21,9 +21,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_RedMove {
      * Expected: 0111_1000
      */
     @Test
-    public void move_OO_to_OOO() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_OO.getIntValue());
-        assertEquals(COLUMN_OOO.getIntValue(), result);
+    public void move_OOEE_to_OOOE() throws BoardStateException {
+        int result   = columnMoves.moveRed(COLUMN_4R_OOEE.getIntValue());
+        assertEquals(COLUMN_4R_OOOE.getIntValue(), result);
     }
 
     /*
@@ -37,9 +37,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_RedMove {
      * Expected: 0111_1010
      */
     @Test
-    public void move_OO_to_OXO() throws GameException {
-        int result   = columnMoves.moveRed(COLUMN_XO.getIntValue());
-        assertEquals(COLUMN_OXO.getIntValue(), result);
+    public void move_OXEE_to_OXOE() throws GameException {
+        int result   = columnMoves.moveRed(COLUMN_4R_OXEE.getIntValue());
+        assertEquals(COLUMN_4R_OXOE.getIntValue(), result);
     }
 
     /*
@@ -53,9 +53,9 @@ public class FourRowColumnMoveExecutor_TwoToThree_RedMove {
      * Expected: 0111_1001
      */
     @Test
-    public void move_OX_to_OOX() throws GameException {
-        int result   = columnMoves.moveRed(COLUMN_OX.getIntValue());
-        assertEquals(COLUMN_OOX.getIntValue(), result);
+    public void move_XOEE_to_XOOE() throws GameException {
+        int result   = columnMoves.moveRed(COLUMN_4R_XOEE.getIntValue());
+        assertEquals(COLUMN_4R_XOOE.getIntValue(), result);
     }
 
     /*
@@ -69,8 +69,8 @@ public class FourRowColumnMoveExecutor_TwoToThree_RedMove {
      * Expected: 0000_0011
      */
     @Test
-    public void move_XX_to_OXX() throws GameException {
-        int result   = columnMoves.moveRed(COLUMN_XX.getIntValue());
-        assertEquals(COLUMN_OXX.getIntValue(), result);
+    public void move_XXEE_to_XXOE() throws GameException {
+        int result   = columnMoves.moveRed(COLUMN_4R_XXEE.getIntValue());
+        assertEquals(COLUMN_4R_XXOE.getIntValue(), result);
     }
 }

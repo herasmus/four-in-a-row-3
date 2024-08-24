@@ -20,8 +20,8 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0000
      */
     @Test
-    public void move_OOO_to_OOOO() throws BoardStateException {
-        assertEquals(COLUMN_4R_OOOO.getIntValue(), columnMoves.moveRed(COLUMN_OOO.getIntValue()));
+    public void move_OOOE_to_OOOO() throws BoardStateException {
+        assertEquals(COLUMN_4R_OOOO.getIntValue(), columnMoves.moveRed(COLUMN_4R_OOOE.getIntValue()));
     }
 
     /*
@@ -35,9 +35,9 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0001
      */
     @Test
-    public void move_OOX_to_OOOX() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_OOX.getIntValue());
-        assertEquals(COLUMN_4R_OOOX.getIntValue(), result);
+    public void move_XOOE_to_XOOO() throws BoardStateException {
+        int result = columnMoves.moveRed(COLUMN_4R_XOOE.getIntValue());
+        assertEquals(COLUMN_4R_XOOO.getIntValue(), result);
     }
 
     /*
@@ -51,9 +51,9 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0010
      */
     @Test
-    public void move_OXO_to_OOXO() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_OXO.getIntValue());
-        assertEquals(COLUMN_4R_OOXO.getIntValue(), result);
+    public void move_OXOE_to_OXOO() throws BoardStateException {
+        int result = columnMoves.moveRed(COLUMN_4R_OXOE.getIntValue());
+        assertEquals(COLUMN_4R_OXOO.getIntValue(), result);
     }
 
     /*
@@ -67,9 +67,9 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0011
      */
     @Test
-    public void move_OXX_to_OOXX() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_OXX.getIntValue());
-        assertEquals(COLUMN_4R_OOXX.getIntValue(), result);
+    public void move_XXOE_to_XXOO() throws BoardStateException {
+        int result   = columnMoves.moveRed(COLUMN_4R_XXOE.getIntValue());
+        assertEquals(COLUMN_4R_XXOO.getIntValue(), result);
     }
 
     /*
@@ -83,9 +83,9 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0100
      */
     @Test
-    public void move_XOO_to_OXOO() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_XOO.getIntValue());
-        assertEquals(COLUMN_4R_OXOO.getIntValue(), result);
+    public void move_OOXE_to_OOXO() throws BoardStateException {
+        int result   = columnMoves.moveRed(COLUMN_4R_OOXE.getIntValue());
+        assertEquals(COLUMN_4R_OOXO.getIntValue(), result);
     }
 
     /*
@@ -99,9 +99,9 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0101
      */
     @Test
-    public void move_XOX_to_OXOX() throws BoardStateException {
-        int result   = columnMoves.moveRed(COLUMN_XOX.getIntValue());
-        assertEquals(COLUMN_4R_OXOX.getIntValue(), result);
+    public void move_XOXE_to_XOXO() throws BoardStateException {
+        int result   = columnMoves.moveRed(COLUMN_4R_XOXE.getIntValue());
+        assertEquals(COLUMN_4R_XOXO.getIntValue(), result);
     }
 
     /*
@@ -115,8 +115,8 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0110
      */
     @Test
-    public void move_XXO_to_OXXO() throws BoardStateException {
-        assertEquals(COLUMN_4R_OXXO.getIntValue(), columnMoves.moveRed(COLUMN_XXO.getIntValue()));
+    public void move_OXXE_to_OXXE() throws BoardStateException {
+        assertEquals(COLUMN_4R_OXXO.getIntValue(), columnMoves.moveRed(COLUMN_4R_OXXE.getIntValue()));
     }
 
     /*
@@ -130,7 +130,7 @@ public class FourRowColumnMoveExecutor_ThreeToFour_RedMove {
      * Expected: 1100_0111
      */
     @Test
-    public void move_XXX_to_OXXX() throws BoardStateException {
-        assertEquals(COLUMN_4R_OXXX.getIntValue(), columnMoves.moveRed(COLUMN_XXX.getIntValue()));
+    public void move_XXXE_to_XXXO() throws BoardStateException {
+        assertEquals(COLUMN_4R_XXXO.getIntValue(), columnMoves.moveRed(COLUMN_4R_XXXE.getIntValue()));
     }
 }

@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.COLUMN_EMPTY;
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.COLUMN_4R_EEEE;
 
 /**
  * NOTE: All methods in this class is zero-based
@@ -24,7 +24,7 @@ import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowCol
 public class BoardUtility {
     private final GameDimensions dimensions;
     private final ColumnUtility columnUtility;
-    private final ColumnStringOperations columnOperations;
+
     /**
      * Return available slots as a bit-pattern:
      *
@@ -69,7 +69,7 @@ public class BoardUtility {
         long result = 0;
         for(int col = 0; col < dimensions.getNrOfColumns(); col++) {
             result <<= 8;
-            result |= COLUMN_EMPTY.getIntValue();
+            result |= COLUMN_4R_EEEE.getIntValue();
         }
         return result;
     }

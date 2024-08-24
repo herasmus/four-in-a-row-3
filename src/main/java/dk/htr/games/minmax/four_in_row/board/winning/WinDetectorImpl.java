@@ -1,6 +1,7 @@
 package dk.htr.games.minmax.four_in_row.board.winning;
 
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
+import dk.htr.games.minmax.four_in_row.board.render.BoardStateLogger;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,13 @@ public class WinDetectorImpl implements WinDetector {
     private static final Logger logger = LoggerFactory.getLogger(WinDetectorImpl.class);
     private final GameDimensions dimensions;
     private final ColumnUtility columnUtility;
+    private final BoardStateLogger boardStateLogger;
 
     @Override
     public boolean hasWinner(char[][] board, int move) throws GameException {
-
+        if(logger.isTraceEnabled()) {
+            boardStateLogger.logBoardStateTrace(board);
+        }
         if (hasVerticalMatch(board[move])) {
             return true;
         }

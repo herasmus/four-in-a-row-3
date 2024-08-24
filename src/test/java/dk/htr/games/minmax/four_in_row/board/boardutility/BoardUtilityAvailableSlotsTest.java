@@ -16,19 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BoardUtilityAvailableSlotsTest {
     // 2x4x3 board
     final static GameDimensions gameDim2x4x3 = new GameDimensions(2, 4, 3);
-    final static ColumnStringOperations columnOperations2x4x3 = new ColumnStringOperations(gameDim2x4x3);
 
     // 5x4x3 board
     final static GameDimensions gameDim5x4x3 = new GameDimensions(5, 4, 3);
-    final static ColumnStringOperations columnOperations5x4x3 = new ColumnStringOperations(gameDim5x4x3);
-
 
     @Test
     public void noAvailableSlots() throws GameException {
         // Constructing stuff manually - todo Dependency injection?
         ColumnUtility columnUtility = new ColumnUtility(gameDim2x4x3);
-        BoardUtility boardUtility = new BoardUtility(gameDim2x4x3, columnUtility, columnOperations2x4x3);
-        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim2x4x3, columnOperations2x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim2x4x3, columnUtility);
+        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim2x4x3, boardUtility);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
         final long board = 0b11000011_11001101L;
@@ -54,12 +51,11 @@ public class BoardUtilityAvailableSlotsTest {
     @Test
     public void someAvailableSlots() throws GameException {
         GameDimensions gameDim5x4x3 = new GameDimensions(5, 4, 3);
-        ColumnStringOperations columnOperations5x4x3 = new ColumnStringOperations(gameDim5x4x3);
 
         // Constructing stuff manually - todo Dependency injection?
         ColumnUtility columnUtility = new ColumnUtility(gameDim5x4x3);
-        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility, columnOperations5x4x3);
-        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility);
+        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, boardUtility);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
         final long board = 0b00000010_00000001_11001001_00000100_11001101L;
@@ -75,8 +71,8 @@ public class BoardUtilityAvailableSlotsTest {
     public void maxAvailableSlots() throws GameException {
         // Constructing stuff manually - todo Dependency injection?
         ColumnUtility columnUtility = new ColumnUtility(gameDim5x4x3);
-        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility, columnOperations5x4x3);
-        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, columnOperations5x4x3);
+        BoardUtility boardUtility = new BoardUtility(gameDim5x4x3, columnUtility);
+        BoardStateAsciiRenderer boardState = new BoardStateAsciiRenderer(gameDim5x4x3, boardUtility);
         BoardStateLogger boardStateLogger = new BoardStateLogger(boardState);
 
         final long board = 0b01111010_00000001_00000010_01111110_00000101L;

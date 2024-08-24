@@ -24,9 +24,9 @@ public class FourRowColumnMoveExecutor_OneToTwo {
      * Expected: 0111_1100
      */
     @Test
-    public void move_O_to_OO() throws GameException {
-        int expected = COLUMN_OO.getIntValue();
-        int result   = columnMoves.moveRed(COLUMN_O.getIntValue());
+    public void move_OEEE_to_OOEE() throws GameException {
+        int expected = COLUMN_4R_OOEE.getIntValue();
+        int result   = columnMoves.moveRed(COLUMN_4R_OEEE.getIntValue());
         if(expected != result) {
             String gotStr = columnToBinaryString(result);
             logger.error("Before: 0111_1110 -> Red (0) -> Expected result: 01111100  <-- Got: " + gotStr);
@@ -45,10 +45,9 @@ public class FourRowColumnMoveExecutor_OneToTwo {
      * Expected: 0000_0010
      */
     @Test
-    public void move_O_to_XO() throws GameException {
-        int expected = COLUMN_XO.getIntValue();
-        int result   = columnMoves.moveBlue(COLUMN_O.getIntValue());
-        assertEquals(COLUMN_XO.getIntValue(), result);
+    public void move_OEEE_to_OXEE() throws GameException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_OEEE.getIntValue());
+        assertEquals(COLUMN_4R_OXEE.getIntValue(), result);
     }
 
     /*
@@ -62,9 +61,9 @@ public class FourRowColumnMoveExecutor_OneToTwo {
      * Expected: 0111_1101
      */
     @Test
-    public void move_X_to_OX() throws GameException {
-        int result   = columnMoves.moveRed(COLUMN_X.getIntValue());
-        assertEquals(COLUMN_OX.getIntValue(), result);
+    public void move_XEEE_to_XOEE() throws GameException {
+        int result   = columnMoves.moveRed(COLUMN_4R_XEEE.getIntValue());
+        assertEquals(COLUMN_4R_XOEE.getIntValue(), result);
     }
 
     /*
@@ -78,8 +77,8 @@ public class FourRowColumnMoveExecutor_OneToTwo {
      * Expected: 0000_0011
      */
     @Test
-    public void move_X_to_XX() throws GameException {
-        int result   = columnMoves.moveBlue(COLUMN_X.getIntValue());
-        assertEquals(COLUMN_XX.getIntValue(), result);
+    public void move_XEEE_to_XXEE() throws GameException {
+        int result   = columnMoves.moveBlue(COLUMN_4R_XEEE.getIntValue());
+        assertEquals(COLUMN_4R_XXEE.getIntValue(), result);
     }
 }

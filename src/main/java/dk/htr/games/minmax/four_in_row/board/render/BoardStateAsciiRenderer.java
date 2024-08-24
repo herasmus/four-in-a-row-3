@@ -1,5 +1,6 @@
 package dk.htr.games.minmax.four_in_row.board.render;
 
+import dk.htr.games.minmax.four_in_row.board.BoardUtility;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnStringOperations;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BoardStateAsciiRenderer {
     private final GameDimensions dimensions;
-    private final ColumnStringOperations columnOperations;
+    private final BoardUtility boardUtility;
 
     private void addRowNumbers(String[] rowStrings) {
         for(int rowNumber = 1; rowNumber <= dimensions.getNrOfRows(); rowNumber++) {
@@ -46,15 +47,7 @@ public class BoardStateAsciiRenderer {
      *
      */
     public String[] getBoardStateAsciiImage(long board) throws GameException {
-        String[] rows = new String[dimensions.getNrOfRows() + 2];
-        addRowNumbers(rows);
-        for (int i = 0; i < dimensions.getNrOfColumns(); i++) {
-      //      int columnState = readByte(board, i);
-      //      columnOperations.addColumnStr(columnState, rows);
-        }
-        addBottomLine(rows);
-        addColumnNumbers(rows);
-        return rows;
+        return getBoardStateAsciiImage(boardUtility.convertToCharMatrix(board));
     }
 
     public String[] getBoardStateAsciiImage(char[][] board) throws GameException {

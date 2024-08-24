@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     Logger logger = LoggerFactory.getLogger(WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight.class);
+    GameDimensions dimensions = new GameDimensions(7, 6, 4);
+    ColumnUtility columnUtility = new ColumnUtility(dimensions);
+    WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility, null);
 
     String diagonalMatchUpperLeftLowerRight_Middle[] =
             { "O     ",
@@ -26,9 +29,6 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     public void diagonalMatchUpperLeftLowerRight_Middle() throws GameException {
         logger.warn("Running diagonalMatchLowerLeftUpperRight_Middle");
         logger.warn("-----------------------------------------------");
-        var dimensions = new GameDimensions(7, 6, 4);
-        ColumnUtility columnUtility = new ColumnUtility(dimensions);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchUpperLeftLowerRight_Middle);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));
@@ -52,9 +52,6 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     public void diagonalMatchUpperLeftLowerRight_LowerLeft() throws GameException {
         logger.warn("Running adiagonalMatchUpperLeftLowerRight_LowerLeft");
         logger.warn("-----------------------------------------------");
-        var dimensions = new GameDimensions(7, 6, 4);
-        ColumnUtility columnUtility = new ColumnUtility(dimensions);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchUpperLeftLowerRight_LowerLeft);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));
@@ -78,9 +75,6 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     public void diagonalMatchUpperLeftLowerRight_UpperLeft() throws GameException {
         logger.warn("Running diagonalMatchUpperLeftLowerRight_UpperLeft");
         logger.warn("-----------------------------------------------");
-        var dimensions = new GameDimensions(7, 6, 4);
-        ColumnUtility columnUtility = new ColumnUtility(dimensions);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchUpperLeftLowerRight_UpperLeft);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));
@@ -104,9 +98,6 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     public void diagonalMatchUpperLeftLowerRight_LowerRight() throws GameException {
         logger.warn("Running diagonalMatchUpperLeftLowerRight_LowerRight");
         logger.warn("-----------------------------------------------");
-        var dimensions = new GameDimensions(7, 6, 4);
-        ColumnUtility columnUtility = new ColumnUtility(dimensions);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchUpperLeftLowerRight_LowerRight);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));
@@ -130,9 +121,6 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     public void diagonalMatchUpperLeftLowerRight_UpperRight() throws GameException {
         logger.warn("Running diagonalMatchUpperLeftLowerRight_UpperRight");
         logger.warn("---------------------------------------------------");
-        var dimensions = new GameDimensions(7, 6, 4);
-        ColumnUtility columnUtility = new ColumnUtility(dimensions);
-        WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility);
         char[][] board = BoardCreator.createBoard(diagonalMatchUpperLeftLowerRight_UpperRight);
 
         assertFalse(winDetector.hasVerticalMatch(board[4]));

@@ -67,7 +67,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
 
     private boolean gameOver(long board, int move) throws GameException {
         char[][] charBoard = boardUtility.convertToCharMatrix(board);
-        return board == initialBoard || winDetector.hasWinner(charBoard, move);
+        return (board != initialBoard) && winDetector.hasWinner(charBoard, move);
     }
 
     @Override
