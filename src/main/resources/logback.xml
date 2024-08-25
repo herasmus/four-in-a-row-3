@@ -5,7 +5,7 @@
         </filter>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{HH:mm:ss.SSS} %-5level %logger{0}-20 - %msg%n
+                %d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n
                 <!--%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n-->
             </Pattern>
         </layout>
@@ -13,13 +13,13 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>trace</level>
+            <level>debug</level>
         </filter>
         <file>c:/viden/game-logger.log</file> <!-- Specify the path to your log file -->
         <append>false</append> <!-- Append to existing log file (if any) -->
         <encoder>
             <Pattern>
-            %d{HH:mm:ss.SSS} %-5level %logger{0}-20 - %msg%n
+            %d{HH:mm:ss.SSS} %-5level %-22logger{0} %msg%n
 <!--            <pattern>%date{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
             </Pattern>
         </encoder>
@@ -34,12 +34,12 @@
     </logger>-->
 
     <!-- Logger for com.example.MyClass -->
-    <logger name="dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl" level="TRACE" additivity="false">
+    <logger name="dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl" level="DEBUG" additivity="false">
         <appender-ref ref="FILE" />
         <appender-ref ref="CONSOLE" />
     </logger>
 
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

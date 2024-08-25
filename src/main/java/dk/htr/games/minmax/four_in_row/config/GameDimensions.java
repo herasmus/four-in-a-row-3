@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "dimensions")
 public class GameDimensions {
-    private final int nrOfColumns;
-    private final int nrOfRows;
-    private final int lengthToWin;
+    private int nrOfColumns;
+    private int nrOfRows;
+    private int lengthToWin;
 }

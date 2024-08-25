@@ -22,7 +22,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
     final private BoardUtility boardUtility;
     final private WinDetector winDetector;
     final private MoveExecuter moveExecuter;
-    private long initialBoard = -1L;
+    private int initialMove = -1;
 
     @Override
     public long getNumberOfBoardsEvaluated() {
@@ -58,7 +58,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
             logger.trace("<-- minimize HUMAN move: {}", move);
             // Make move
             long newBoard = moveExecuter.moveRed(currentBoard, move);
-            best = min(best, miniMax(newBoard, move, false));
+            best = min(best, miniMax(newBoard, move, true));
             // We win - that is all we need
             if(best > 0 ) break;
         }
@@ -67,7 +67,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
 
     private boolean gameOver(long board, int move) throws GameException {
         char[][] charBoard = boardUtility.convertToCharMatrix(board);
-        return (board != initialBoard) && winDetector.hasWinner(charBoard, move);
+        return (move != initialMove) && winDetector.hasWinner(charBoard, move);
     }
 
     @Override
@@ -92,16 +92,16 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
 
         // AIPlayer (maximising player)
         if (isMaximising) {
-            logger.trace("AI Player - maximizing)");
+            logger.warn("# AI Player - maximizing)");
             return maximize(board);
         } else {
-            logger.trace("Human player - minimizing)");
+            logger.warn("# Human player - minimizing)");
             return minimize(board);
         }
     }
 
     public int run() throws GameException {
-        initialBoard = boardUtility.createInitialBoard();
+        var initialBoard = boardUtility.createInitialBoard();
         return miniMax(initialBoard, -1, true);
     }
 }

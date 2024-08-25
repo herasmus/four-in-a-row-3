@@ -20,11 +20,41 @@ public class BoardStateLogger {
     private static final Logger logger = LoggerFactory.getLogger(BoardStateLogger.class);
 
     public void logBoardStateTrace(long board) throws GameException {
-        String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
-
         if(logger.isTraceEnabled()) {
+            String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
             for(String str : boardStateStrings) {
                 logger.trace(str);;
+            }
+        }
+    }
+
+    public void logBoardStateTrace(long board, Logger paramLogger) throws GameException {
+        if(paramLogger.isTraceEnabled()) {
+            String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
+
+            for (String str : boardStateStrings) {
+                paramLogger.trace(str);
+                ;
+            }
+        }
+    }
+
+    public void logBoardStateTrace(char[][] board, Logger paramLogger) throws GameException {
+        if(paramLogger.isTraceEnabled()) {
+            String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
+
+            for (String str : boardStateStrings) {
+                paramLogger.trace(str);
+            }
+        }
+    }
+
+    public void logBoardStateDebug(char[][] board, Logger paramLogger) throws GameException {
+        if(paramLogger.isDebugEnabled()) {
+            String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
+
+            for (String str : boardStateStrings) {
+                paramLogger.debug(str);
             }
         }
     }
@@ -38,9 +68,8 @@ public class BoardStateLogger {
     }
 
     public void logBoardStateTrace(char[][] board) throws GameException {
-        String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
-
         if(logger.isTraceEnabled()) {
+            String[] boardStateStrings = boardState.getBoardStateAsciiImage(board);
             for(String str : boardStateStrings) {
                 logger.trace(str);;
             }

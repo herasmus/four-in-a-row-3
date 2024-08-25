@@ -2,10 +2,12 @@ package dk.htr.games.minmax.four_in_row.board.columns.four;
 
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnMoveExecutor;
 import dk.htr.games.minmax.four_in_row.exceptions.BoardStateException;
+import org.springframework.stereotype.Component;
 
 import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.*;
 import static dk.htr.games.minmax.four_in_row.board.columns.four.ValidFourRowColumns.COLUMN_4R_XXXE;
 
+@Component
 public class FourRowColumnMoveExecutor implements ColumnMoveExecutor {
     final protected static int[]  RED_MOVES_4R;
     final protected static int[]  BLUE_MOVES_4R;
@@ -65,6 +67,7 @@ public class FourRowColumnMoveExecutor implements ColumnMoveExecutor {
         BLUE_MOVES_4R[COLUMN_4R_XXXE.getIntValue()] = COLUMN_4R_XXXX.getIntValue();
     }
 
+    @Override
     public int moveBlue(int column) throws BoardStateException {
         if(!columnValidator.isValidColumn(column)) {
             throw new BoardStateException("Invalid column " + column);
@@ -76,6 +79,7 @@ public class FourRowColumnMoveExecutor implements ColumnMoveExecutor {
         return  moveResult;
     }
 
+    @Override
     public int moveRed(int column) throws BoardStateException {
         if(!columnValidator.isValidColumn(column)) {
             throw new BoardStateException("Invalid column " + column);

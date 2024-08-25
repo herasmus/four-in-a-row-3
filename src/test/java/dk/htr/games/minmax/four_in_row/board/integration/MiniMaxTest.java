@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class MiniMaxTest {
     private static final Logger logger = LoggerFactory.getLogger(MiniMaxTest.class);
 
-    //@Test
+    @Test
     public void dryRun() throws GameException {
         var dimensions = new GameDimensions(7, 4, 4);
         var columnUtility = new ColumnUtility(dimensions);
