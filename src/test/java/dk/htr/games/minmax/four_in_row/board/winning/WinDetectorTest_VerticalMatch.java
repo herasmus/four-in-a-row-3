@@ -10,6 +10,9 @@ import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import org.junit.jupiter.api.Test;
 
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ColumnStrings.O;
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ColumnStrings.X;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WinDetectorTest_VerticalMatch {
@@ -21,15 +24,6 @@ public class WinDetectorTest_VerticalMatch {
     BoardStateLogger boardStateLogger;
     WinDetectorImpl winDetector;
 
-    String verticalMatchFourToWin_Middle[] =
-            { "      ",
-                    "XXXO  ",
-                    "XOOX  ",
-                    "XOOOO ",
-                    "OXX   ",
-                    "OXX   ",
-                    "OXOO  " };
-
     public WinDetectorTest_VerticalMatch() {
         dimensions = new GameDimensions(7, 6, 4);
         columnUtility = new ColumnUtility(dimensions);
@@ -39,12 +33,29 @@ public class WinDetectorTest_VerticalMatch {
         winDetector = new WinDetectorImpl(dimensions, columnUtility, boardStateLogger);
     }
 
+    private void setNumberOfDiscs(char[][] board, int move) {
+        char[] column = board[move];
+        winDetector.numberOfDiscs = columnUtility.getNumberDiscs(column);
+    }
+
+    String verticalMatchFourToWin_Middle[] =
+            { "      ",
+                    "XXXO  ",
+                    "XOOX  ",
+                    "XOOOO ",
+                    "OXX   ",
+                    "OXX   ",
+                    "OXOO  " };
+
     @Test
     public void verticalMatchFourToWin_Middle() throws GameException {
         char[][] board = BoardCreator.createBoard(verticalMatchFourToWin_Middle);
 
-        assertTrue(winDetector.hasVerticalMatch(board[3]));
-        assertTrue(winDetector.hasWinner(board, 3));
+        // Not pretty - but important to see which match function is activated
+        int move = 3;
+        setNumberOfDiscs(board, move);
+        assertTrue(winDetector.hasVerticalMatch(board[move]));
+        assertEquals(O, winDetector.winner(board, move));
     }
 
     String verticalMatchFourToWin_LowerLeft[] =
@@ -59,9 +70,10 @@ public class WinDetectorTest_VerticalMatch {
     @Test
     public void verticalMatchFourToWin_LowerLeft() throws GameException {
         char[][] board = BoardCreator.createBoard(verticalMatchFourToWin_LowerLeft);
-
-        assertTrue(winDetector.hasVerticalMatch(board[0]));
-        assertTrue(winDetector.hasWinner(board, 0));
+        int move = 0;
+        setNumberOfDiscs(board, move);
+        assertTrue(winDetector.hasVerticalMatch(board[move]));
+        assertEquals(O, winDetector.winner(board, move));
     }
 
     String verticalMatchFourToWin_UpperLeft[] =
@@ -76,9 +88,10 @@ public class WinDetectorTest_VerticalMatch {
     @Test
     public void verticalMatchFourToWin_UpperLeft() throws GameException {
         char[][] board = BoardCreator.createBoard(verticalMatchFourToWin_UpperLeft);
-
-        assertTrue(winDetector.hasVerticalMatch(board[0]));
-        assertTrue(winDetector.hasWinner(board, 0));
+        int move = 0;
+        setNumberOfDiscs(board, move);
+        assertTrue(winDetector.hasVerticalMatch(board[move]));
+        assertEquals(O, winDetector.winner(board, move));
     }
 
     String verticalMatchFourToWin_LowerRight[] =
@@ -93,9 +106,10 @@ public class WinDetectorTest_VerticalMatch {
     @Test
     public void verticalMatchFourToWin_LowerRight() throws GameException {
         char[][] board = BoardCreator.createBoard(verticalMatchFourToWin_LowerRight);
-
-        assertTrue(winDetector.hasVerticalMatch(board[6]));
-        assertTrue(winDetector.hasWinner(board, 6));
+        int move = 6;
+        setNumberOfDiscs(board, move);
+        assertTrue(winDetector.hasVerticalMatch(board[move]));
+        assertEquals(X, winDetector.winner(board, move));
     }
 
     String verticalMatchFourToWin_UpperRight[] =
@@ -110,8 +124,9 @@ public class WinDetectorTest_VerticalMatch {
     @Test
     public void verticalMatchFourToWin_UpperRight() throws GameException {
         char[][] board = BoardCreator.createBoard(verticalMatchFourToWin_UpperRight);
-
-        assertTrue(winDetector.hasVerticalMatch(board[6]));
-        assertTrue(winDetector.hasWinner(board, 6));
+        int move = 6;
+        setNumberOfDiscs(board, move);
+        assertTrue(winDetector.hasVerticalMatch(board[move]));
+        assertEquals(O, winDetector.winner(board, move));
     }
 }

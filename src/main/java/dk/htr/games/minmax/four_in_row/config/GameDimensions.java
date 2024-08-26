@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Configuration
 @ConfigurationProperties(prefix = "dimensions")
 public class GameDimensions {

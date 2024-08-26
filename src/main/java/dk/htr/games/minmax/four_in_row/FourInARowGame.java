@@ -53,7 +53,15 @@ public class FourInARowGame implements ApplicationRunner {
 */
 		logger.info("FourInARowGame run: " );
 		var initialBoard = boardUtility.createInitialBoard();
+		long startTime = System.nanoTime();
 		int res = miniMaxAlgorithm.miniMax(initialBoard, -1, true);
+		long endTime = System.nanoTime();
+		// Convert to milliseconds if needed
+		double elapsedTimeInMillis = endTime / 1_000_000.0;
+
+		// Print the execution time
+		logger.error("Elapsed time in nanoseconds: " + endTime);
+		logger.error("Elapsed time in milliseconds: " + elapsedTimeInMillis);
 		logger.info("FourInARowGame: " + res);
 	}
 }

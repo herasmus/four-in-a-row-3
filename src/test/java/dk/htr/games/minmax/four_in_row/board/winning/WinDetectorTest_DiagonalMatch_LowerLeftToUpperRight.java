@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ColumnStrings.O;
+import static dk.htr.games.minmax.four_in_row.board.columns.four.ColumnStrings.X;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
@@ -21,6 +23,12 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
     BoardStateAsciiRenderer boardStateAsciiRenderer = new BoardStateAsciiRenderer(dimensions, boardUtility);
     BoardStateLogger boardStateLogger = new BoardStateLogger(boardStateAsciiRenderer);
     WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility, boardStateLogger);
+
+    private void setNumberOfDiscsAndMoveColour(char[][] board, int move) {
+        char[] column = board[move];
+        winDetector.numberOfDiscs = columnUtility.getNumberDiscs(column);
+        winDetector.thisMoveDiscColour = column[winDetector.numberOfDiscs - 1];
+    }
 
     String diagonalMatchLowerLeftUpperRight_Middle[] =
             { "O     ",
@@ -38,12 +46,12 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_Middle);
 
         int move = 3;
-
+        setNumberOfDiscsAndMoveColour(board, move);
         assertFalse(winDetector.hasVerticalMatch(board[move]));
         assertFalse(winDetector.hasHorizontalMatch(board, move));
         assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, move));
         assertTrue(winDetector.hasDiagonalMatch(board, move));
-        assertTrue(winDetector.hasWinner(board, move));
+        assertEquals(X, winDetector.winner(board, move));
     }
 
     String diagonalMatchLowerLeftUpperRight_LowerLeft[] =
@@ -60,12 +68,14 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         logger.warn("Running diagonalMatchLowerLeftUpperRight_LowerLeft");
         logger.warn("--------------------------------------------------");
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_LowerLeft);
+        int move = 2;
+        setNumberOfDiscsAndMoveColour(board, move);
 
-        assertFalse(winDetector.hasVerticalMatch(board[2]));
-        assertFalse(winDetector.hasHorizontalMatch(board, 2));
-        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, 2));
-        assertTrue(winDetector.hasDiagonalMatch(board, 2));
-        assertTrue(winDetector.hasWinner(board, 2));
+        assertFalse(winDetector.hasVerticalMatch(board[move]));
+        assertFalse(winDetector.hasHorizontalMatch(board, move));
+        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, move));
+        assertTrue(winDetector.hasDiagonalMatch(board, move));
+        assertEquals(X, winDetector.winner(board, move));
     }
 
     String diagonalMatchLowerLeftUpperRight_UpperLeft[] =
@@ -73,7 +83,7 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
               "XXOX  ",
               "OOXOX ",
               "XXOXXX",
-              "X     ",
+              "O     ",
               "OO    ",
               "XXOOXX" };
 
@@ -82,12 +92,14 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         logger.warn("Running diagonalMatchLowerLeftUpperRight_UpperLeft");
         logger.warn("--------------------------------------------------");
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_UpperLeft);
+        int move = 3;
+        setNumberOfDiscsAndMoveColour(board, move);
 
-        assertFalse(winDetector.hasVerticalMatch(board[3]));
-        assertFalse(winDetector.hasHorizontalMatch(board, 3));
+        assertFalse(winDetector.hasVerticalMatch(board[move]));
+        assertFalse(winDetector.hasHorizontalMatch(board, move));
         assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, 3));
-        assertTrue(winDetector.hasDiagonalMatch(board, 3));
-        assertTrue(winDetector.hasWinner(board, 3));
+        assertTrue(winDetector.hasDiagonalMatch(board, move));
+        assertEquals(X, winDetector.winner(board, move));
     }
 
     String diagonalMatchLowerLeftUpperRight_LowerRight[] =
@@ -104,12 +116,14 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         logger.warn("Running diagonalMatchLowerLeftUpperRight_LowerRight");
         logger.warn("--------------------------------------------------");
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_LowerRight);
+        int move = 6;
+        setNumberOfDiscsAndMoveColour(board, move);
 
-        assertFalse(winDetector.hasVerticalMatch(board[6]));
-        assertFalse(winDetector.hasHorizontalMatch(board, 6));
-        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, 6));
-        assertTrue(winDetector.hasDiagonalMatch(board, 6));
-        assertTrue(winDetector.hasWinner(board, 6));
+        assertFalse(winDetector.hasVerticalMatch(board[move]));
+        assertFalse(winDetector.hasHorizontalMatch(board, move));
+        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, move));
+        assertTrue(winDetector.hasDiagonalMatch(board, move));
+        assertEquals(O, winDetector.winner(board, move));
     }
 
     String diagonalMatchLowerLeftUpperRight_UpperRight[] =
@@ -126,11 +140,13 @@ public class WinDetectorTest_DiagonalMatch_LowerLeftToUpperRight {
         logger.warn("Running diagonalMatchLowerLeftUpperRight_UpperRight");
         logger.warn("--------------------------------------------------");
         char[][] board = BoardCreator.createBoard(diagonalMatchLowerLeftUpperRight_UpperRight);
+        int move = 4;
+        setNumberOfDiscsAndMoveColour(board, move);
 
-        assertFalse(winDetector.hasVerticalMatch(board[4]));
-        assertFalse(winDetector.hasHorizontalMatch(board, 4));
-        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, 4));
-        assertTrue(winDetector.hasDiagonalMatch(board, 4));
-        assertTrue(winDetector.hasWinner(board, 4));
+        assertFalse(winDetector.hasVerticalMatch(board[move]));
+        assertFalse(winDetector.hasHorizontalMatch(board, move));
+        assertTrue(winDetector.hasDiagonalMatchLowerLeftToUpperRight(board, move));
+        assertTrue(winDetector.hasDiagonalMatch(board, move));
+        assertEquals(O, winDetector.winner(board, move));
     }
 }

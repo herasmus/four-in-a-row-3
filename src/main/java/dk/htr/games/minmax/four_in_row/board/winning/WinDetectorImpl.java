@@ -21,11 +21,11 @@ public class WinDetectorImpl implements WinDetector {
     private final GameDimensions dimensions;
     private final ColumnUtility columnUtility;
     private final BoardStateLogger boardStateLogger;
-    private char thisMoveDiscColour;
-    private int numberOfDiscs;
+    protected char thisMoveDiscColour;
+    protected int numberOfDiscs;
 
     @Override
-    public boolean hasWinner(char[][] board, int move) throws GameException {
+    public char winner(char[][] board, int move) throws GameException {
         char[] column = board[move];
         numberOfDiscs = columnUtility.getNumberDiscs(column);
         thisMoveDiscColour = column[numberOfDiscs - 1];
@@ -40,17 +40,17 @@ public class WinDetectorImpl implements WinDetector {
         }
         if(hasVerticalMatch(board[move])) {
             logger.debug("### Match ###");
-            return true;
+            return thisMoveDiscColour;
         }
         if(hasHorizontalMatch(board, move)) {
             logger.debug("### Match ###");
-            return true;
+            return thisMoveDiscColour;
         }
         if(hasDiagonalMatch(board, move)) {
             logger.debug("### Match ###");
-            return true;
+            return thisMoveDiscColour;
         }
-        return false;
+        return 0;
     }
 
     /*
@@ -98,19 +98,20 @@ public class WinDetectorImpl implements WinDetector {
     }
 
     protected boolean hasDiagonalMatchUpperLeftToLowerRight(char[][] board, int move) {
-        logger.debug("Upper Left to Left Right:");
-        logger.debug("-------------------------");
+        logger.debug("Upper Left to Lower Right:");
+        logger.debug("--------------------------");
 
-        for (int colNr = 0; colNr <= (dimensions.getNrOfColumns() - dimensions.getLengthToWin()); colNr++) {
+        int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
+        for (int colNr = 0; colNr <= numberOfStartRowPositions; colNr++) {
             logger.trace("Column nr:                 {}", colNr);
             logger.trace("Column:                    '" + (new String(board[colNr])) + "'");
             int startRow = dimensions.getNrOfRows() - 1;
-            int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
             outer:
-            for (int rowNr = startRow; rowNr >= numberOfStartRowPositions; rowNr--) {
+            for (int rowNr = startRow; rowNr >= (dimensions.getLengthToWin() - 1); rowNr--) {
                 for (int i = 0; i < dimensions.getLengthToWin(); i++) {
+                    logger.trace("Position: {}, {}", colNr + i, rowNr - i);
                     char currentDiscColour = board[colNr + i][rowNr - i];
-                    logger.trace("Position: {}, {}     Colour: '{}'", colNr + i, rowNr - i, currentDiscColour);
+                    logger.trace("Colour:  '{}'", currentDiscColour);
                     if (currentDiscColour != thisMoveDiscColour) {
                         logger.trace("--> No Match <--\n");
                         continue outer;
@@ -124,7 +125,7 @@ public class WinDetectorImpl implements WinDetector {
 
     protected boolean hasDiagonalMatchLowerLeftToUpperRight(char[][] board, int move) {
         logger.debug("Lower Left to Upper Right:");
-        logger.debug("- ------------------------");
+        logger.debug("--------------------------");
 
         int numberOfStartRowPositions = dimensions.getNrOfColumns() - dimensions.getLengthToWin();
         for (int colNr = 0; colNr <= numberOfStartRowPositions; colNr++) {
@@ -133,8 +134,9 @@ public class WinDetectorImpl implements WinDetector {
             outer:
             for (int rowNr = 0; rowNr <= (dimensions.getNrOfRows() - dimensions.getLengthToWin()); rowNr++) {
                 for (int i = 0; i < dimensions.getLengthToWin(); i++) {
+                    logger.trace("Position: {}, {}", colNr + i, rowNr + i);
                     char currentDiscColour = board[colNr + i][rowNr + i];
-                    logger.trace("Position: {}, {}     Colour: '{}'", colNr + i, rowNr + i, currentDiscColour);
+                    logger.trace("Colour:  '{}'", currentDiscColour);
                     if (currentDiscColour != thisMoveDiscColour) {
                         logger.trace("--> No Match <--\n");
                         continue outer;

@@ -1,7 +1,7 @@
 <configuration>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>trace</level>
+            <level>info</level>
         </filter>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
@@ -13,7 +13,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>debug</level>
+            <level>DEBUG</level>
         </filter>
         <file>c:/viden/game-logger.log</file> <!-- Specify the path to your log file -->
         <append>false</append> <!-- Append to existing log file (if any) -->
@@ -34,13 +34,13 @@
     </logger>-->
 
     <!-- Logger for com.example.MyClass -->
-    <logger name="dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl" level="DEBUG" additivity="false">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="CONSOLE" />
-    </logger>
+    <!--    <logger name="dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl" level="TRACE" additivity="false">
+            <appender-ref ref="FILE" />
+             <appender-ref ref="CONSOLE"/>
+    </logger> -->
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+         <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> -->
     </root>
 </configuration>

@@ -60,14 +60,9 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
             long newBoard = moveExecuter.moveRed(currentBoard, move);
             best = min(best, miniMax(newBoard, move, true));
             // We win - that is all we need
-            if(best > 0 ) break;
+            if(best < 0 ) break;
         }
         return best;
-    }
-
-    private boolean gameOver(long board, int move) throws GameException {
-        char[][] charBoard = boardUtility.convertToCharMatrix(board);
-        return (move != initialMove) && winDetector.hasWinner(charBoard, move);
     }
 
     @Override
@@ -76,32 +71,46 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
         if (logger.isTraceEnabled()) {
             logger.trace("Boards evaluated so far: {}", nrOfBoardsEvaluated);
         } else {
-            if (nrOfBoardsEvaluated % 10000 == 0) {
-                logger.debug("Boards evaluated so far: {}", nrOfBoardsEvaluated);
+            if (nrOfBoardsEvaluated % 100000 == 0) {
+                logger.info("Boards evaluated so far: {}", nrOfBoardsEvaluated);
             }
         }
 
-        // if state is terminal, then return score (Leaf node)
-        if(gameOver(board, move)) {
-            if (isMaximising) {
-                return 1;
-            } else {
-                return -1;
+        if(move != initialMove) {
+            char[][] charBoard = boardUtility.convertToCharMatrix(board);
+            int evalutionResult = winDetector.winner(charBoard, move);
+            if(evalutionResult != 0) {
+                if(evalutionResult > 0) {
+                    // AI Wins
+                    return 1;
+                } else {
+                    // Player Wins
+                    return -1;
+                }
             }
         }
 
         // AIPlayer (maximising player)
         if (isMaximising) {
-            logger.warn("# AI Player - maximizing)");
+            logger.debug("# AI Player - maximizing)");
             return maximize(board);
         } else {
-            logger.warn("# Human player - minimizing)");
+            logger.debug("# Human player - minimizing)");
             return minimize(board);
         }
     }
 
     public int run() throws GameException {
         var initialBoard = boardUtility.createInitialBoard();
-        return miniMax(initialBoard, -1, true);
+        long startTime = System.nanoTime();
+        var result = miniMax(initialBoard, -1, true);
+        long endTime = System.nanoTime();
+        // Convert to milliseconds if needed
+        double elapsedTimeInMillis = endTime / 1_000_000.0;
+
+        // Print the execution time
+        logger.error("Elapsed time in nanoseconds: " + endTime);
+        logger.error("Elapsed time in milliseconds: " + elapsedTimeInMillis);
+        return result;
     }
 }
