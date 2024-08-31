@@ -21,6 +21,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 @RequiredArgsConstructor
 @Setter
 @Getter
@@ -38,6 +43,19 @@ public class FourInARowGame implements ApplicationRunner {
 		application.run(args);
 	}
 
+	private String getTimeStamp() {
+
+		// Get the current Instant
+		Instant now = Instant.now();
+
+		// Convert the Instant to LocalDateTime
+		LocalDateTime dateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
+
+		// Format the LocalDateTime to a readable format
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+		return dateTime.format(formatter);
+	}
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		/*
@@ -51,17 +69,33 @@ public class FourInARowGame implements ApplicationRunner {
 		var moveExecuter = new MoveExecuterImpl(fourRowColumnMoveExecutor, dimensions);
 		var miniMax = new MemoryOptimizedMiniMax(dimensions, boardUtility, winDetector, moveExecuter);
 */
-		logger.info("FourInARowGame run: " );
+		System.out.println("FourInARowGame run: " + getTimeStamp());
+		System.out.println("Dimensions: " + gameDimensions.getNrOfColumns());
 		var initialBoard = boardUtility.createInitialBoard();
 		long startTime = System.nanoTime();
 		int res = miniMaxAlgorithm.miniMax(initialBoard, -1, true);
 		long endTime = System.nanoTime();
+		long elapsedTime = endTime - startTime;
 		// Convert to milliseconds if needed
-		double elapsedTimeInMillis = endTime / 1_000_000.0;
+		double elapsedTimeInMillis = elapsedTime / 1_000_000.0;
 
 		// Print the execution time
-		logger.error("Elapsed time in nanoseconds: " + endTime);
+		System.out.println("Elapsed time in nanoseconds: " + elapsedTime);
+		System.out.println("Elapsed time in milliseconds: " + elapsedTimeInMillis);
+		System.out.println("FourInARowGame: " + res);
+
+		res = miniMaxAlgorithm.miniMax(initialBoard, -1, true);
+		endTime = System.nanoTime();
+		// Convert to milliseconds if needed
+		endTime = System.nanoTime();
+		elapsedTime = endTime - startTime;
+		// Convert to milliseconds if needed
+		elapsedTimeInMillis = elapsedTime / 1_000_000.0;
+
+		// Print the execution time
+		logger.error("Elapsed time in nanoseconds: " + elapsedTime);
 		logger.error("Elapsed time in milliseconds: " + elapsedTimeInMillis);
 		logger.info("FourInARowGame: " + res);
+
 	}
 }

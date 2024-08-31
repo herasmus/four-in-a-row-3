@@ -37,10 +37,10 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
                 // Column full
                 continue;
             }
-            logger.trace("--> maximize AI placement: {}", move);
+//            logger.trace("--> maximize AI placement: {}", move);
             // Make move
-            long newBoard = moveExecuter.moveBlue(currentBoard, move);
-            best = max(best, miniMax(newBoard, move, false));
+            //long newBoard = moveExecuter.moveBlue(currentBoard, move);
+            best = max(best, miniMax(moveExecuter.moveRed(currentBoard, move), move, false));
             // We win - that is all we need
             if(best > 0 ) break;
         }
@@ -55,10 +55,10 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
                 // Column full
                 continue;
             }
-            logger.trace("<-- minimize HUMAN move: {}", move);
+//            logger.trace("<-- minimize HUMAN move: {}", move);
             // Make move
-            long newBoard = moveExecuter.moveRed(currentBoard, move);
-            best = min(best, miniMax(newBoard, move, true));
+//            long newBoard = moveExecuter.moveRed(currentBoard, move);
+            best = min(best, miniMax(moveExecuter.moveRed(currentBoard, move), move, true));
             // We win - that is all we need
             if(best < 0 ) break;
         }
@@ -68,13 +68,13 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
     @Override
     public int miniMax(long board, int move, boolean isMaximising) throws GameException {
         nrOfBoardsEvaluated++;
-        if (logger.isTraceEnabled()) {
+/*        if (logger.isTraceEnabled()) {
             logger.trace("Boards evaluated so far: {}", nrOfBoardsEvaluated);
         } else {
             if (nrOfBoardsEvaluated % 100000 == 0) {
                 logger.info("Boards evaluated so far: {}", nrOfBoardsEvaluated);
             }
-        }
+        }*/
 
         if(move != initialMove) {
             char[][] charBoard = boardUtility.convertToCharMatrix(board);
@@ -92,10 +92,10 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
 
         // AIPlayer (maximising player)
         if (isMaximising) {
-            logger.debug("# AI Player - maximizing)");
+    //        logger.debug("# AI Player - maximizing)");
             return maximize(board);
         } else {
-            logger.debug("# Human player - minimizing)");
+      //      logger.debug("# Human player - minimizing)");
             return minimize(board);
         }
     }
@@ -111,6 +111,8 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
         // Print the execution time
         logger.error("Elapsed time in nanoseconds: " + endTime);
         logger.error("Elapsed time in milliseconds: " + elapsedTimeInMillis);
+
+
         return result;
     }
 }

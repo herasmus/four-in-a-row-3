@@ -68,18 +68,17 @@ public enum ValidFourRowColumns {
     }
 
     public static char[] getCharArray(int column) throws BoardStateException {
-        if ((column < 0)) throw new BoardStateException("Column state cant be less than 0x00");
-        if ((column > 255)) throw new BoardStateException("Column state cant be greater than 0xFF");
-        char[] result = columnCharArray[column];
-        if(!isValidColumn(column)) {
+    //    if ((column < 0)) throw new BoardStateException("Column state cant be less than 0x00");
+    //    if ((column > 255)) throw new BoardStateException("Column state cant be greater than 0xFF");
+        if(!columnValidity[column]) {
             throw new BoardStateException("No array representation for invalid column");
         }
-        return result;
+        return columnCharArray[column];
     }
 
     public static boolean isValidColumn(int column) throws BoardStateException {
-        if ((column < 0)) throw new BoardStateException("Column state cant be less than 0x00");
-        if ((column > 255)) throw new BoardStateException("Column state cant be greater than 0xFF");
+//        if ((column < 0)) throw new BoardStateException("Column state cant be less than 0x00");
+//        if ((column > 255)) throw new BoardStateException("Column state cant be greater than 0xFF");
         return columnValidity[column];
     }
 }

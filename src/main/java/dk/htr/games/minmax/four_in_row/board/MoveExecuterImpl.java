@@ -29,7 +29,7 @@ public class MoveExecuterImpl implements MoveExecuter {
      */
     @Override
     public long moveBlue(long presentBoard, int move) throws GameException {
-        checkMoveInRange(move);
+        //checkMoveInRange(move);
         int columnBefore = readByte(presentBoard, move);
         int columnAfter = columnMoveExecutor.moveBlue(columnBefore);
         return writeByte(presentBoard, columnAfter, move);
@@ -37,7 +37,7 @@ public class MoveExecuterImpl implements MoveExecuter {
 
     @Override
     public long moveRed(long presentBoard, int move) throws GameException {
-        checkMoveInRange(move);
+        //checkMoveInRange(move);
         int columnBefore = readByte(presentBoard, move);
         int columnAfter = columnMoveExecutor.moveRed(columnBefore);
         return writeByte(presentBoard, columnAfter, move);
