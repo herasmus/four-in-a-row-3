@@ -34,7 +34,7 @@ public class FourInARowGame implements ApplicationRunner {
 	static Logger logger = LoggerFactory.getLogger(FourInARowGame.class);
 	//private NInARowGame nInARowGame;
 	private final GameDimensions gameDimensions;
-	private final MiniMaxAlgorithm miniMaxAlgorithm;
+	private final MemoryOptimizedMiniMax miniMaxAlgorithm;
 	private final BoardUtility boardUtility;
 
 	public static void main(String[] args) {
@@ -83,7 +83,7 @@ public class FourInARowGame implements ApplicationRunner {
 		System.out.println("Elapsed time in nanoseconds: " + elapsedTime);
 		System.out.println("Elapsed time in milliseconds: " + elapsedTimeInMillis);
 		System.out.println("FourInARowGame: " + res);
-
+/*
 		res = miniMaxAlgorithm.miniMax(initialBoard, -1, true);
 		endTime = System.nanoTime();
 		// Convert to milliseconds if needed
@@ -95,7 +95,11 @@ public class FourInARowGame implements ApplicationRunner {
 		// Print the execution time
 		logger.error("Elapsed time in nanoseconds: " + elapsedTime);
 		logger.error("Elapsed time in milliseconds: " + elapsedTimeInMillis);
-		logger.info("FourInARowGame: " + res);
+*/
+		System.out.println("Number of boards evaluated: " + miniMaxAlgorithm.getNumberOfBoardsEvaluated());
+		System.out.println("Number of winning boards:   " + miniMaxAlgorithm.getNumberOfWinningBoardsAI());
+
+		System.out.println("FourInARowGame: " + res);
 
 	}
 }

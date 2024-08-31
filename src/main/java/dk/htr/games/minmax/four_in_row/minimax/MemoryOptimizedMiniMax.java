@@ -23,11 +23,17 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
     final private WinDetector winDetector;
     final private MoveExecuter moveExecuter;
     private int initialMove = -1;
+    private long numberOfWinningBoardsAI;
 
     @Override
     public long getNumberOfBoardsEvaluated() {
         return nrOfBoardsEvaluated;
     }
+
+    public long getNumberOfWinningBoardsAI() {
+        return numberOfWinningBoardsAI;
+    }
+
 
     private int maximize(long currentBoard) throws GameException {
         int best = -666_666;
@@ -40,7 +46,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
 //            logger.trace("--> maximize AI placement: {}", move);
             // Make move
             //long newBoard = moveExecuter.moveBlue(currentBoard, move);
-            best = max(best, miniMax(moveExecuter.moveRed(currentBoard, move), move, false));
+            best = max(best, miniMax(moveExecuter.moveBlue(currentBoard, move), move, false));
             // We win - that is all we need
             if(best > 0 ) break;
         }
@@ -81,6 +87,7 @@ public class MemoryOptimizedMiniMax implements MiniMaxAlgorithm {
             int evalutionResult = winDetector.winner(charBoard, move);
             if(evalutionResult != 0) {
                 if(evalutionResult > 0) {
+                    numberOfWinningBoardsAI++;
                     // AI Wins
                     return 1;
                 } else {
