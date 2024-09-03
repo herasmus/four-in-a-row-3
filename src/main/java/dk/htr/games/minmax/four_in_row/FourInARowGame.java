@@ -1,15 +1,8 @@
 package dk.htr.games.minmax.four_in_row;
 
 import dk.htr.games.minmax.four_in_row.board.BoardUtility;
-import dk.htr.games.minmax.four_in_row.board.MoveExecuterImpl;
-import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
-import dk.htr.games.minmax.four_in_row.board.columns.four.FourRowColumnMoveExecutor;
-import dk.htr.games.minmax.four_in_row.board.render.BoardStateAsciiRenderer;
-import dk.htr.games.minmax.four_in_row.board.render.BoardStateLogger;
-import dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.minimax.MemoryOptimizedMiniMax;
-import dk.htr.games.minmax.four_in_row.minimax.MiniMaxAlgorithm;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -83,6 +76,7 @@ public class FourInARowGame implements ApplicationRunner {
 		System.out.println("Elapsed time in nanoseconds: " + elapsedTime);
 		System.out.println("Elapsed time in milliseconds: " + elapsedTimeInMillis);
 		System.out.println("FourInARowGame: " + res);
+		miniMaxAlgorithm.closeFile();
 /*
 		res = miniMaxAlgorithm.miniMax(initialBoard, -1, true);
 		endTime = System.nanoTime();

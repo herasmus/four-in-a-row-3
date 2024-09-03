@@ -4,7 +4,6 @@ import dk.htr.games.minmax.four_in_row.board.BoardUtility;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateAsciiRenderer;
 import dk.htr.games.minmax.four_in_row.board.render.BoardStateLogger;
-import dk.htr.games.minmax.four_in_row.board.columns.ColumnStringOperations;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.GameException;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,5 @@
 package dk.htr.games.minmax.four_in_row.board;
 
-import dk.htr.games.minmax.four_in_row.board.columns.ColumnStringOperations;
 import dk.htr.games.minmax.four_in_row.board.columns.ColumnUtility;
 import dk.htr.games.minmax.four_in_row.config.GameDimensions;
 import dk.htr.games.minmax.four_in_row.exceptions.BoardStateException;

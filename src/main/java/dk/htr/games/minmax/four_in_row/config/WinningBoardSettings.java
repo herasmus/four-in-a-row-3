@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "dimensions")
-public class GameDimensions {
-    private int nrOfColumns;
-    private int nrOfRows;
-    private int lengthToWin;
+@ConfigurationProperties(prefix = "winning.board.file")
+public class WinningBoardSettings {
+    private boolean saveWinningBoards;
+    private String winningBoardsFilePath;// = "c:/Viden/winning.wb";
 }

@@ -19,7 +19,7 @@ public class WinDetectorTest_HorizontalMatch {
     BoardUtility boardUtility;
     BoardStateAsciiRenderer boardStateAsciiRenderer;
     BoardStateLogger boardStateLogger;
-    WinDetectorImpl winDetector;
+    BruteForceWinDetector winDetector;
 
     public WinDetectorTest_HorizontalMatch() {
         dimensions = new GameDimensions(7, 6, 4);
@@ -27,7 +27,7 @@ public class WinDetectorTest_HorizontalMatch {
         boardUtility = new BoardUtility(dimensions, columnUtility);
         boardStateAsciiRenderer = new BoardStateAsciiRenderer(dimensions, boardUtility);
         boardStateLogger = new BoardStateLogger(boardStateAsciiRenderer);
-        winDetector = new WinDetectorImpl(dimensions, columnUtility, boardStateLogger);
+        winDetector = new BruteForceWinDetector(dimensions, columnUtility, boardStateLogger);
     }
 
     private void setNumberOfDiscsAndMoveColour(char[][] board, int move) {

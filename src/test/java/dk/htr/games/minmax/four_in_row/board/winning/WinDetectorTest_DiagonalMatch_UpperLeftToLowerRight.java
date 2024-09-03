@@ -22,7 +22,7 @@ public class WinDetectorTest_DiagonalMatch_UpperLeftToLowerRight {
     BoardUtility boardUtility = new BoardUtility(dimensions, columnUtility);
     BoardStateAsciiRenderer boardStateAsciiRenderer = new BoardStateAsciiRenderer(dimensions, boardUtility);
     BoardStateLogger boardStateLogger = new BoardStateLogger(boardStateAsciiRenderer);
-    WinDetectorImpl winDetector = new WinDetectorImpl(dimensions, columnUtility, boardStateLogger);
+    BruteForceWinDetector winDetector = new BruteForceWinDetector(dimensions, columnUtility, boardStateLogger);
 
     private void setNumberOfDiscsAndMoveColour(char[][] board, int move) {
         char[] column = board[move];

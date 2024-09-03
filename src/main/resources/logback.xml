@@ -34,7 +34,7 @@
     </logger>-->
 
     <!-- Logger for com.example.MyClass -->
-    <!--    <logger name="dk.htr.games.minmax.four_in_row.board.winning.WinDetectorImpl" level="TRACE" additivity="false">
+    <!--    <logger name="dk.htr.games.minmax.four_in_row.board.winning.BruteForceWinDetector" level="TRACE" additivity="false">
             <appender-ref ref="FILE" />
              <appender-ref ref="CONSOLE"/>
     </logger> -->
